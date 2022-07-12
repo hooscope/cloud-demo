@@ -1,9 +1,10 @@
 package cn.itcast.order.service;
 
+import cn.itcast.order.entity.Dog;
 import cn.itcast.order.mapper.OrderMapper;
 import cn.itcast.order.pojo.Order;
-import cn.itcast.order.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,5 +28,12 @@ public class OrderService {
 //        order.setUser(user);
         // 4.返回
         return order;
+    }
+
+    @Cacheable(value = "HelloWorldCache")
+    public Dog getDog(int age) {
+
+        System.out.println("run in it" + age);
+        return new Dog("xiaolan", "blue", 4);
     }
 }
