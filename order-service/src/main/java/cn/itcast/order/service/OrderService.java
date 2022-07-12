@@ -3,6 +3,7 @@ package cn.itcast.order.service;
 import cn.itcast.order.entity.Dog;
 import cn.itcast.order.mapper.OrderMapper;
 import cn.itcast.order.pojo.Order;
+import cn.itcast.order.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -39,3 +40,4 @@ public class OrderService {
         return new Dog("xiaolan", "blue", 4);
     }
 }
+
