@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_PATH" value="/usr/local/log/cloud-demo" />
+    <property name="PROJECT_NAME" value="member-service" />
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="SYSTEM-INFO"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/${PROJECT_NAME}.system_info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxHistory>60</MaxHistory>
+            <MaxFileSize>500MB</MaxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%X{TRACE-ID}-%X{SPAN-ID}] [%X{d-name}] [%X{d-hotel-id}] [%thread] [%-5level] %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="LOG-JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Prudent>true</Prudent>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/${PROJECT_NAME}.%d{yyyy-MM-dd}.json</FileNamePattern>
+            <MaxHistory>3</MaxHistory>
+        </rollingPolicy>
+        <layout class="com.shands.log.layout.HttpJsonPatternLayout"></layout>
+    </appender>
+    <logger name="com.shands" level="INFO" additivity="false">
+        <appender-ref ref="LOG-JSON" />
+    </logger>
+    <root level="info">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="SYSTEM-INFO" />
+    </root>
+</configuration>

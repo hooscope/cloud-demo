@@ -11,6 +11,7 @@
         <module>user-service</module>
         <module>order-service</module>
         <module>eureka-server</module>
+        <module>member-service</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -29,6 +30,8 @@
         <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
         <mysql.version>5.1.47</mysql.version>
         <mybatis.version>2.1.1</mybatis.version>
+        <logback.version>1.2.3</logback.version>
+        <shands-log.version>0.0.4-SNAPSHOT</shands-log.version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +44,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>2.2.7.RELEASE</version>
+            </dependency>
+
             <!--nacos的管理依赖-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -61,12 +70,72 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba</groupId>-->
+<!--                <artifactId>fastjson</artifactId>-->
+<!--                <version>1.2.83</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
     <dependencies>
         <dependency>
+            <groupId>com.shands.plugin</groupId>
+            <artifactId>shands-log-trace</artifactId>
+            <version>${shands-log.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.shands.plugin</groupId>
+            <artifactId>shands-log-feign</artifactId>
+            <version>${shands-log.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.shands.plugin</groupId>
+            <artifactId>shands-log-json</artifactId>
+            <version>${shands-log.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!-- LOG -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <!-- SkyWalking 工具类 -->
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+            <version>6.6.0</version>
+        </dependency>
+<!--        zipkin接入-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-zipkin</artifactId>-->
+<!--        </dependency>-->
+<!--        jaeger接入-->
+<!--        <dependency>-->
+<!--            <groupId>io.opentracing.contrib</groupId>-->
+<!--            <artifactId>opentracing-spring-jaeger-cloud-starter</artifactId>-->
+<!--            <version>3.2.2</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.jaegertracing</groupId>-->
+<!--            <artifactId>jaeger-client</artifactId>-->
+<!--            <version>1.6.0</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 </project>
